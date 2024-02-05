@@ -1,0 +1,14 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1707123625
+icon.svg::CompressedTexture2D::2882659122518466825::1707026462::1707026471::1::::<><>::
+Sprite-0001.png::CompressedTexture2D::1839930613083043606::1707029895::1707029895::1::::<><>::
+::res://assets/::1707027530
+::res://boss-rush-jam/::1707123496
+README.md::TextFile::-1::1707123496::0::1::::<><>::
+::res://scenes/::1707031976
+bullet.tscn::PackedScene::2721259930367160361::1707031976::0::1::::<><>::res://scripts/bullet.gd<>uid://1hjng75rmxpm::::res://Sprite-0001.png
+game.tscn::PackedScene::5386317838744076927::1707031976::0::1::::<><>::uid://bs4kptj6601u2::::res://scenes/player.tscn
+player.tscn::PackedScene::3710321794179485955::1707031976::0::1::::<><>::res://scripts/player.gd<>uid://1hjng75rmxpm::::res://Sprite-0001.png
+::res://scripts/::1707031407
+bullet.gd::GDScript::-1::1707031407::0::1::::<>Area2D<>::
+player.gd::GDScript::-1::1707030519::0::1::::<>CharacterBody2D<>::
