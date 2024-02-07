@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs4kptj6601u2"]
+[gd_scene load_steps=6 format=3 uid="uid://bs4kptj6601u2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_y3kej"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_8wosq"]
+[ext_resource type="PackedScene" uid="uid://c68k4p27ox5u2" path="res://scenes/gun.tscn" id="3_1b0xf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3n5vj"]
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r1sbb"]
+size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
+platform_floor_layers = 0
 script = ExtResource("1_y3kej")
 speed = 500.0
 accel = 50.0
@@ -16,7 +20,7 @@ accel = 50.0
 shape = SubResource("RectangleShape2D_3n5vj")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-modulate = Color(0.333333, 0.588235, 1, 1)
+modulate = Color(0.301961, 0.65098, 1, 1)
 texture = ExtResource("2_8wosq")
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -24,3 +28,6 @@ texture = ExtResource("2_8wosq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_r1sbb")
 debug_color = Color(0.988235, 0.101961, 0, 0.419608)
+
+[node name="Gun" parent="." instance=ExtResource("3_1b0xf")]
+position = Vector2(16, 0)

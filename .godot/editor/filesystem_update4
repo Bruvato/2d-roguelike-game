@@ -1,3 +1,13 @@
+res://scenes/game.tscn
 res://scenes/player.tscn
 res://scenes/bullet.tscn
-res://scenes/game.tscn
+res://scripts/gun.gd
+res://scenes/gun.tscn
+res://scripts/bullet.gd
+res://scenes/boss.tscn
+res://scripts/boss.gd
+res://scenes/explosion.tscn
+res://scripts/explosion.gd
+res://scripts/enemy.gd
+res://scenes/enemy.tscn
+res://scenes/explosion_particle.tscn

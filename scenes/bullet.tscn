@@ -4,14 +4,19 @@
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_ulkgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xm5uy"]
+size = Vector2(16, 16)
 
 [node name="Bullet" type="Area2D"]
+top_level = true
 script = ExtResource("1_2e61k")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 0.894118, 0.470588, 1)
 scale = Vector2(1, 0.5)
 texture = ExtResource("2_ulkgy")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_xm5uy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
