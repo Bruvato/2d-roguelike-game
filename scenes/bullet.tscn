@@ -9,8 +9,9 @@ size = Vector2(16, 16)
 [node name="Bullet" type="Area2D"]
 top_level = true
 script = ExtResource("1_2e61k")
+knockback_force = 100.0
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.894118, 0.470588, 1)
 scale = Vector2(1, 0.5)
 texture = ExtResource("2_ulkgy")
@@ -19,4 +20,5 @@ texture = ExtResource("2_ulkgy")
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_xm5uy")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

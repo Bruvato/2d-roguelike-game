@@ -1,6 +1,8 @@
-Timer
 CollisionShape2D
+HurtBoxComponent
+Timer
 Area2D
+Node2D
 WorldEnvironment
 GPUParticles2D
 CharacterBody2D

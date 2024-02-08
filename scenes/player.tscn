@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs4kptj6601u2"]
+[gd_scene load_steps=8 format=3 uid="uid://bs4kptj6601u2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_y3kej"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_8wosq"]
 [ext_resource type="PackedScene" uid="uid://c68k4p27ox5u2" path="res://scenes/gun.tscn" id="3_1b0xf"]
+[ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/health_component.tscn" id="4_bt305"]
+[ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/hurtbox_component.tscn" id="5_vwyda"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3n5vj"]
 size = Vector2(16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r1sbb"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcfmg"]
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D"]
@@ -19,15 +21,19 @@ accel = 50.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3n5vj")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.301961, 0.65098, 1, 1)
 texture = ExtResource("2_8wosq")
 
-[node name="Hitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_r1sbb")
-debug_color = Color(0.988235, 0.101961, 0, 0.419608)
-
 [node name="Gun" parent="." instance=ExtResource("3_1b0xf")]
 position = Vector2(16, 0)
+
+[node name="Health Component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_bt305")]
+MAX_HEALTH = 3.0
+sprite = NodePath("../Sprite2D")
+
+[node name="HurtBox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_vwyda")]
+health_component = NodePath("../Health Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox Component"]
+shape = SubResource("RectangleShape2D_kcfmg")

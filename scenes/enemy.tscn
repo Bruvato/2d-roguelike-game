@@ -1,33 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7j0bsuybyyil"]
+[gd_scene load_steps=7 format=3 uid="uid://b7j0bsuybyyil"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_vwiim"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_ld3k2"]
+[ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/health_component.tscn" id="3_7ql3b"]
+[ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/hurtbox_component.tscn" id="4_hl44f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r36j"]
 size = Vector2(16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5v2aa"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tb42b"]
 size = Vector2(16, 16)
 
 [node name="Enemy" type="CharacterBody2D"]
 platform_floor_layers = 0
 script = ExtResource("1_vwiim")
 
-[node name="Square" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.921569, 0.337255, 0.294118, 1)
 texture = ExtResource("2_ld3k2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0r36j")
 
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.05
-one_shot = true
+[node name="Health Component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_7ql3b")]
+MAX_HEALTH = 3.0
+sprite = NodePath("../Sprite2D")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="HurtBox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_hl44f")]
+health_component = NodePath("../Health Component")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_5v2aa")
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox Component"]
+shape = SubResource("RectangleShape2D_tb42b")
