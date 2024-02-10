@@ -1,15 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://be1g0vap5etwr"]
+[gd_scene load_steps=5 format=3 uid="uid://be1g0vap5etwr"]
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_2e61k"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_ulkgy"]
+[ext_resource type="PackedScene" uid="uid://cajfl0e4y8mwr" path="res://scenes/particle_component.tscn" id="3_0ylcw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xm5uy"]
 size = Vector2(16, 16)
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" node_paths=PackedStringArray("particle_component")]
 top_level = true
 script = ExtResource("1_2e61k")
 knockback_force = 100.0
+particle_component = NodePath("Particle Component")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.894118, 0.470588, 1)
@@ -19,6 +21,8 @@ texture = ExtResource("2_ulkgy")
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_xm5uy")
+
+[node name="Particle Component" parent="." instance=ExtResource("3_0ylcw")]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

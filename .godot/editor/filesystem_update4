@@ -4,10 +4,11 @@ res://scenes/gun.tscn
 res://scenes/bullet.tscn
 res://scenes/enemy.tscn
 res://scenes/explosion_particle.tscn
-res://scenes/hurtbox_component.tscn
-res://scripts/bullet.gd
-res://scripts/health_component.gd
 res://scenes/health_component.tscn
+res://scenes/hurtbox_component.tscn
+res://scenes/box.tscn
+res://scripts/health_component.gd
 res://scripts/enemy.gd
-res://scripts/gun.gd
-res://scripts/player.gd
+res://scripts/particle_component.gd
+res://scenes/particle_component.tscn
+res://scripts/bullet.gd

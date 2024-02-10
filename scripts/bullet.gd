@@ -5,7 +5,7 @@ extends Area2D
 @export var attack_damage: float = 1.0
 @export var knockback_force: float = 10.0
 
-const EXPLOSION_PARTICLE = preload("res://scenes/explosion_particle.tscn")
+@export var particle_component: ParticleComponent
 
 
 func _physics_process(delta):
@@ -14,19 +14,13 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	spawn_explosion()
 	
 	queue_free()
 	#AOE explosion?
+	
+	particle_component.spawn_particle(global_position)
 
 func _on_area_entered(area):
 	if area is HurtBoxComponent:
 		var attack = Attack.new(attack_damage, knockback_force, global_position)
 		area.take_damage(attack)
-
-
-func spawn_explosion():
-	var explosion = EXPLOSION_PARTICLE.instantiate()
-	explosion.global_position = global_position
-	explosion.emitting = true
-	get_tree().current_scene.add_child(explosion)

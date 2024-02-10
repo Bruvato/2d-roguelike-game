@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b7j0bsuybyyil"]
+[gd_scene load_steps=8 format=3 uid="uid://b7j0bsuybyyil"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_vwiim"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_ld3k2"]
 [ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/health_component.tscn" id="3_7ql3b"]
 [ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/hurtbox_component.tscn" id="4_hl44f"]
+[ext_resource type="PackedScene" uid="uid://cajfl0e4y8mwr" path="res://scenes/particle_component.tscn" id="5_1rc3q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0r36j"]
 size = Vector2(16, 16)
@@ -22,12 +23,15 @@ texture = ExtResource("2_ld3k2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0r36j")
 
-[node name="Health Component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_7ql3b")]
+[node name="Health Component" parent="." node_paths=PackedStringArray("sprite", "particle_component") instance=ExtResource("3_7ql3b")]
 MAX_HEALTH = 3.0
 sprite = NodePath("../Sprite2D")
+particle_component = NodePath("../Particle Component")
 
 [node name="HurtBox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_hl44f")]
 health_component = NodePath("../Health Component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox Component"]
 shape = SubResource("RectangleShape2D_tb42b")
+
+[node name="Particle Component" parent="." instance=ExtResource("5_1rc3q")]

@@ -5,7 +5,7 @@ extends CharacterBody2D
 
 @onready var player: CharacterBody2D = get_parent().get_child(0)
 
-const DEATH_PARTICLE = preload("res://scenes/explosion_particle.tscn")
+const DEATH_PARTICLE: Resource = preload("res://scenes/explosion_particle.tscn")
 
 func _physics_process(delta):
 
@@ -16,6 +16,8 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	look_at(player.global_position)
+	
+	var particel = DEATH_PARTICLE.instantiate()
 
 
 
