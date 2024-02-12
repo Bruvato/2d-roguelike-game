@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cajfl0e4y8mwr"]
-
-[ext_resource type="Script" path="res://scripts/particle_component.gd" id="1_xvnmh"]
-
-[node name="Particle Component" type="Node2D"]
-script = ExtResource("1_xvnmh")

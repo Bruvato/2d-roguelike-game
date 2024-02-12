@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6uuen4iewga5"]
+
+[ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="1_nohws"]
+[ext_resource type="Script" path="res://scenes/particles/particle.gd" id="2_oaual"]
+
+[sub_resource type="Gradient" id="Gradient_4dgtg"]
+offsets = PackedFloat32Array(0.2, 1)
+colors = PackedColorArray(1, 0.894118, 0.470588, 1, 0.921569, 0.337255, 0.294118, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_g1wy3"]
+gradient = SubResource("Gradient_4dgtg")
+
+[sub_resource type="Curve" id="Curve_f7b3o"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8mjuh"]
+curve = SubResource("Curve_f7b3o")
+
+[sub_resource type="Curve" id="Curve_ldrx4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6ldlg"]
+curve = SubResource("Curve_ldrx4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s3hcx"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+damping_min = 100.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_8mjuh")
+scale_curve = SubResource("CurveTexture_6ldlg")
+color_ramp = SubResource("GradientTexture1D_g1wy3")
+
+[node name="Explosion Particle" type="GPUParticles2D"]
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_s3hcx")
+texture = ExtResource("1_nohws")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_oaual")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

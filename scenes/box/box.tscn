@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg7t7jk8503bs"]
+
+[ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="1_nqlia"]
+[ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/components/health/health_component.tscn" id="2_1mxg3"]
+[ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/components/hurtbox/hurtbox_component.tscn" id="3_ngnhd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3myx"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_luhk4"]
+size = Vector2(16, 16)
+
+[node name="Box" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0.921569, 1)
+texture = ExtResource("1_nqlia")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j3myx")
+
+[node name="Health Component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_1mxg3")]
+MAX_HEALTH = 5.0
+sprite = NodePath("../Sprite2D")
+died_signal = "box_died"
+
+[node name="HurtBox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_ngnhd")]
+health_component = NodePath("../Health Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox Component"]
+shape = SubResource("RectangleShape2D_luhk4")

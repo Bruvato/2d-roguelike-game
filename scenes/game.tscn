@@ -1,16 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://ci0f4ridrqfsx"]
+[gd_scene load_steps=14 format=3 uid="uid://ci0f4ridrqfsx"]
 
-[ext_resource type="PackedScene" uid="uid://bs4kptj6601u2" path="res://scenes/player.tscn" id="1_5mk2y"]
-[ext_resource type="PackedScene" uid="uid://b7j0bsuybyyil" path="res://scenes/enemy.tscn" id="2_vdlbc"]
-[ext_resource type="PackedScene" uid="uid://bg7t7jk8503bs" path="res://scenes/box.tscn" id="3_xcke3"]
+[ext_resource type="PackedScene" uid="uid://bs4kptj6601u2" path="res://scenes/player/player.tscn" id="1_5mk2y"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_q8vc1"]
+[ext_resource type="PackedScene" uid="uid://2gxvl8op7aj" path="res://scenes/mouse/mouse.tscn" id="2_s2g7p"]
+[ext_resource type="PackedScene" uid="uid://b7j0bsuybyyil" path="res://scenes/enemy/enemy.tscn" id="2_vdlbc"]
+[ext_resource type="PackedScene" uid="uid://bg7t7jk8503bs" path="res://scenes/box/box.tscn" id="3_xcke3"]
+[ext_resource type="Shader" path="res://shaders/drop_shadow.gdshader" id="4_vsqqg"]
+[ext_resource type="PackedScene" uid="uid://7hivgxnkmgup" path="res://scenes/camera/camera.tscn" id="6_2s27p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5akkw"]
 normal = Vector2(1, 2.08165e-12)
-distance = -180.0
+distance = -320.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n32j3"]
 normal = Vector2(-1, 2.08165e-12)
-distance = -180.0
+distance = -320.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wyax6"]
 normal = Vector2(2.08165e-12, 1)
@@ -19,20 +23,59 @@ distance = -180.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oldoo"]
 distance = -180.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cb1nf"]
+shader = ExtResource("4_vsqqg")
+shader_parameter/background_color = Color(0.196078, 0.160784, 0.278431, 1)
+shader_parameter/shadow_color = Color(0.152941, 0.152941, 0.211765, 1)
+shader_parameter/offset_in_pixels = Vector2(4, 4)
+
 [sub_resource type="Environment" id="Environment_ten1x"]
+background_mode = 3
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_q8vc1")
+
+[node name="Mouse" parent="." instance=ExtResource("2_s2g7p")]
 
 [node name="Player" parent="." instance=ExtResource("1_5mk2y")]
-position = Vector2(180, 180)
+position = Vector2(218, 146)
 
 [node name="Enemy" parent="." instance=ExtResource("2_vdlbc")]
 position = Vector2(75, 187)
 
+[node name="Enemy2" parent="." instance=ExtResource("2_vdlbc")]
+position = Vector2(192, 296)
+
+[node name="Enemy3" parent="." instance=ExtResource("2_vdlbc")]
+position = Vector2(480, 176)
+
+[node name="Box" parent="." instance=ExtResource("3_xcke3")]
+position = Vector2(129, 90)
+
+[node name="Camera2D" parent="." instance=ExtResource("6_2s27p")]
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+position = Vector2(320, 180)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_5akkw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_n32j3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_wyax6")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries"]
+shape = SubResource("WorldBoundaryShape2D_oldoo")
+
+[node name="Particles" type="Node2D" parent="."]
+unique_name_in_owner = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -40,24 +83,10 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.196078, 0.160784, 0.278431, 1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(180, 180)
-
-[node name="Boundaries" type="StaticBody2D" parent="Camera2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Boundaries"]
-shape = SubResource("WorldBoundaryShape2D_5akkw")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Camera2D/Boundaries"]
-shape = SubResource("WorldBoundaryShape2D_n32j3")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Camera2D/Boundaries"]
-shape = SubResource("WorldBoundaryShape2D_wyax6")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Camera2D/Boundaries"]
-shape = SubResource("WorldBoundaryShape2D_oldoo")
-
-[node name="StaticBody2D" parent="." instance=ExtResource("3_xcke3")]
+[node name="Drop Shadow" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_cb1nf")
+offset_right = 640.0
+offset_bottom = 360.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ten1x")

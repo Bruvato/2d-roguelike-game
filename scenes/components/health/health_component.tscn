@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://kf6ombqg0ga4"]
+
+[ext_resource type="Script" path="res://scenes/components/health/health_component.gd" id="1_2df4d"]
+
+[node name="Health Component" type="Node2D"]
+script = ExtResource("1_2df4d")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.05
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]

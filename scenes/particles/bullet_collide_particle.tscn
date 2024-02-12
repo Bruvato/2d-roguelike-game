@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://28hx0gqswoch"]
+
+[ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="1_y3pp5"]
+[ext_resource type="Script" path="res://scenes/particles/particle.gd" id="2_ij0qc"]
+
+[sub_resource type="Curve" id="Curve_2ippx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vf0fg"]
+curve = SubResource("Curve_2ippx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s3hcx"]
+particle_flag_disable_z = true
+spread = 90.0
+initial_velocity_min = 300.0
+initial_velocity_max = 300.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_min = 0.5
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_vf0fg")
+
+[node name="Bullet Collide Particle" type="GPUParticles2D"]
+modulate = Color(1, 0.894118, 0.470588, 1)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_s3hcx")
+texture = ExtResource("1_y3pp5")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_ij0qc")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
