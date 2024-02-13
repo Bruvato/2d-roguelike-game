@@ -5,10 +5,13 @@ res://scenes/player/player.tscn
 res://scenes/gun/gun.tscn
 res://scenes/bullet/bullet.tscn
 res://scenes/enemy/enemy.tscn
+res://scenes/components/attack/attack_component.tscn
 res://scenes/components/health/health_component.tscn
 res://scenes/components/hurtbox/hurtbox_component.tscn
 res://scenes/box/box.tscn
 res://scenes/particles/explosion_particle.tscn
 res://scenes/particles/enemy_death_particle.tscn
 res://scenes/particles/bullet_collide_particle.tscn
-res://scenes/components/attack/attack_component.tscn
+res://scenes/components/attack/attack_component.gd
+res://scenes/bullet/bullet.gd
+res://scenes/player/player.gd

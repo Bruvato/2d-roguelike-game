@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7j0bsuybyyil"]
+[gd_scene load_steps=9 format=3 uid="uid://b7j0bsuybyyil"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_vwiim"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_ld3k2"]
@@ -11,6 +11,9 @@ size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tb42b"]
 size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46f25"]
+size = Vector2(1, 16)
 
 [node name="Enemy" type="CharacterBody2D"]
 platform_floor_layers = 0
@@ -37,3 +40,7 @@ health_component = NodePath("../Health Component")
 shape = SubResource("RectangleShape2D_tb42b")
 
 [node name="Attack Component" parent="." instance=ExtResource("5_lc3jg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Component"]
+position = Vector2(8.5, 0)
+shape = SubResource("RectangleShape2D_46f25")
