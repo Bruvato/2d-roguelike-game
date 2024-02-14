@@ -40,14 +40,10 @@ script = ExtResource("1_q8vc1")
 [node name="Player" parent="." instance=ExtResource("1_5mk2y")]
 position = Vector2(218, 146)
 
-[node name="Enemy" parent="." instance=ExtResource("2_vdlbc")]
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("2_vdlbc")]
 position = Vector2(75, 187)
-
-[node name="Enemy2" parent="." instance=ExtResource("2_vdlbc")]
-position = Vector2(192, 296)
-
-[node name="Enemy3" parent="." instance=ExtResource("2_vdlbc")]
-position = Vector2(480, 176)
 
 [node name="Box" parent="." instance=ExtResource("3_xcke3")]
 position = Vector2(129, 90)
@@ -69,8 +65,9 @@ shape = SubResource("WorldBoundaryShape2D_wyax6")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries"]
 shape = SubResource("WorldBoundaryShape2D_oldoo")
 
+[node name="Projectiles" type="Node2D" parent="."]
+
 [node name="Particles" type="Node2D" parent="."]
-unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

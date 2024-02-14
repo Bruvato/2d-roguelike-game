@@ -13,5 +13,10 @@ res://scenes/particles/explosion_particle.tscn
 res://scenes/particles/enemy_death_particle.tscn
 res://scenes/particles/bullet_collide_particle.tscn
 res://scenes/components/attack/attack_component.gd
+res://scenes/gun/gun.gd
+res://scenes/components/health/health_component.gd
+res://scenes/game.gd
+res://scripts/signals.gd
 res://scenes/bullet/bullet.gd
-res://scenes/player/player.gd
+res://scenes/enemy/enemy.gd
+res://scenes/explosion.tscn

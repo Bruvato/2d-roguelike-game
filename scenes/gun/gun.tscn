@@ -8,6 +8,7 @@ size = Vector2(8, 8)
 
 [node name="Gun" type="Area2D"]
 script = ExtResource("1_4keam")
+fire_rate = 2.0
 reload_time = 3.0
 recoil_force = 75.0
 

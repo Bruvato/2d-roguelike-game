@@ -16,6 +16,8 @@ size = Vector2(16, 16)
 size = Vector2(1, 16)
 
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 7
 platform_floor_layers = 0
 script = ExtResource("1_vwiim")
 speed = 20.0
@@ -34,12 +36,17 @@ sprite = NodePath("../Sprite2D")
 died_signal = "enemy_died"
 
 [node name="HurtBox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("4_kvf4h")]
+collision_layer = 4
+collision_mask = 0
 health_component = NodePath("../Health Component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox Component"]
 shape = SubResource("RectangleShape2D_tb42b")
 
 [node name="Attack Component" parent="." instance=ExtResource("5_lc3jg")]
+collision_layer = 0
+collision_mask = 2
+knockback_force = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Component"]
 position = Vector2(8.5, 0)

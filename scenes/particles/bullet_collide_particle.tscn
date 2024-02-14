@@ -16,14 +16,14 @@ spread = 90.0
 initial_velocity_min = 300.0
 initial_velocity_max = 300.0
 gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
-scale_min = 0.5
-scale_max = 0.5
+scale_min = 0.25
+scale_max = 0.25
 scale_curve = SubResource("CurveTexture_vf0fg")
 
 [node name="Bullet Collide Particle" type="GPUParticles2D"]
 modulate = Color(1, 0.894118, 0.470588, 1)
 emitting = false
-amount = 10
+amount = 3
 process_material = SubResource("ParticleProcessMaterial_s3hcx")
 texture = ExtResource("1_y3pp5")
 lifetime = 0.5

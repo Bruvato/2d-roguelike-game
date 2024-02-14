@@ -20,11 +20,13 @@ texture = ExtResource("1_nqlia")
 shape = SubResource("RectangleShape2D_j3myx")
 
 [node name="Health Component" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("2_1mxg3")]
-MAX_HEALTH = 5.0
+MAX_HEALTH = 1.0
 sprite = NodePath("../Sprite2D")
 died_signal = "box_died"
 
 [node name="HurtBox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_ngnhd")]
+collision_layer = 4
+collision_mask = 0
 health_component = NodePath("../Health Component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox Component"]
