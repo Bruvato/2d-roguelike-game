@@ -6,9 +6,11 @@
 - health bars
 - explosion attack
 
+2/15
+- updated bullet
+
 
 ## Tasks ##
-- [ ] update bullet
 - [ ] fix explosion logic
 - [ ] reload animation
 - [ ] enemy ai
