@@ -22,7 +22,7 @@ shape = SubResource("RectangleShape2D_5l7fv")
 
 [node name="Shooting Point" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(4, 0)
+position = Vector2(-4, 0)
 
 [node name="Fire Cooldown" type="Timer" parent="."]
 unique_name_in_owner = true

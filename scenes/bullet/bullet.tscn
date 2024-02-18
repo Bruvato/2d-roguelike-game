@@ -1,16 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://be1g0vap5etwr"]
+[gd_scene load_steps=6 format=3 uid="uid://be1g0vap5etwr"]
 
 [ext_resource type="Script" path="res://scenes/bullet/bullet.gd" id="1_6vknx"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_toj7o"]
+[ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/attack/attack_component.tscn" id="3_1qpso"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xm5uy"]
 size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxxyk"]
+size = Vector2(16, 8)
 
 [node name="Bullet" type="Area2D"]
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_6vknx")
-knockback_force = 100.0
 life_time = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -22,8 +25,17 @@ texture = ExtResource("2_toj7o")
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_xm5uy")
 
+[node name="Attack Component" parent="." instance=ExtResource("3_1qpso")]
+collision_layer = 0
+collision_mask = 4
+knockback_force = 100.0
+piercing = true
+attack_rate = 2.08165e-12
+died_signal = "bullet_collided"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Component"]
+shape = SubResource("RectangleShape2D_sxxyk")
+
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

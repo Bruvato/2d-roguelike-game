@@ -26,7 +26,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("down"):
 		var new_enemy = ENEMY.instantiate()
-		$Enemies.add_child(new_enemy)
+		#$Enemies.add_child(new_enemy)
 
 func spawn(r: Resource, spawn_position: Vector2):
 	var o = r.instantiate()
