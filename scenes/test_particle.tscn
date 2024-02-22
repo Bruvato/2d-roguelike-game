@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvc7upsa6e5jk"]
+
+[ext_resource type="PackedScene" uid="uid://cd6s3aec5gxoa" path="res://scenes/particles/enemy_death_particle.tscn" id="1_14xlq"]
+[ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_mmfk8"]
+
+[node name="TestParticle" type="Node2D"]
+
+[node name="Square" type="Sprite2D" parent="."]
+modulate = Color(1, 0.329412, 1, 1)
+texture = ExtResource("2_mmfk8")
+
+[node name="Enemy Death Particle" parent="." instance=ExtResource("1_14xlq")]

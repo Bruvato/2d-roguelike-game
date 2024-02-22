@@ -17,9 +17,6 @@ shape = SubResource("CircleShape2D_1exc4")
 [node name="Hitbox Component" parent="." instance=ExtResource("1_8mrxm")]
 collision_layer = 0
 collision_mask = 6
-knockback_force = 300.0
-area_attack = true
-attack_rate = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox Component"]
 scale = Vector2(5, 5)

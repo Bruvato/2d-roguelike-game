@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqsi3oe76v65"]
+[gd_scene load_steps=2 format=3 uid="uid://ceyqlvemhfugj"]
 
-[ext_resource type="Script" path="res://scenes/components/move/character_move_component.gd" id="1_qdrsu"]
+[sub_resource type="GDScript" id="GDScript_g1doc"]
+script/source = "class_name CharacterMoveComponent
+extends Node
+
+@export var character: CharacterBody2D
+
+@export var speed: float
+@export var acceleration: float
+
+var velocity: Vector2
+
+
+func _ready() -> void:
+	pass # Replace with function body.
+
+func _physics_process(delta: float) -> void:
+	
+	character.velocity.x = move_toward(character.velocity.x, velocity.x * speed, acceleration)
+	character.velocity.y = move_toward(character.velocity.y, velocity.y * speed, acceleration)
+	
+	character.move_and_slide()
+"
 
 [node name="MoveComponent" type="Node"]
-script = ExtResource("1_qdrsu")
+script = SubResource("GDScript_g1doc")

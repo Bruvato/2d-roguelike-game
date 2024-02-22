@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://be1g0vap5etwr"]
+[gd_scene load_steps=10 format=3 uid="uid://be1g0vap5etwr"]
 
 [ext_resource type="Script" path="res://scenes/bullet/bullet.gd" id="1_6vknx"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_toj7o"]
 [ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/hitbox/hitbox_component.tscn" id="3_ykexx"]
 [ext_resource type="PackedScene" uid="uid://dy6i0al7h0g7r" path="res://scenes/components/move/move_component.tscn" id="4_k0j1l"]
-[ext_resource type="PackedScene" uid="uid://xth7gvg83fec" path="res://scenes/components/flash/flash_component.tscn" id="5_yhpl6"]
-[ext_resource type="Material" uid="uid://bjm4gtsd5hqu1" path="res://shaders/white_flash_material.tres" id="6_qccw4"]
+[ext_resource type="PackedScene" uid="uid://f1syx7rvfguu" path="res://scenes/components/destroy/destroy_component.tscn" id="5_1rmtu"]
+[ext_resource type="Script" path="res://scenes/components/spawner/spawner_component.gd" id="6_uufri"]
+[ext_resource type="PackedScene" uid="uid://28hx0gqswoch" path="res://scenes/particles/bullet_collide_particle.tscn" id="7_a8hb8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xm5uy"]
 size = Vector2(8, 8)
@@ -29,29 +30,26 @@ texture = ExtResource("2_toj7o")
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_xm5uy")
 
-[node name="Hitbox Component" parent="." instance=ExtResource("3_ykexx")]
-collision_layer = 0
-collision_mask = 4
-knockback_force = 100.0
-died_signal = "bullet_collided"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox Component"]
-shape = SubResource("RectangleShape2D_sxxyk")
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(-4, 0)
-exclude_parent = false
-target_position = Vector2(50, 0)
-
 [node name="Timer" type="Timer" parent="."]
 
 [node name="MoveComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_k0j1l")]
 actor = NodePath("..")
 speed = 300.0
 
-[node name="FlashComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_yhpl6")]
-flash_material = ExtResource("6_qccw4")
-sprite = NodePath("../Sprite2D")
+[node name="HitboxComponent" parent="." instance=ExtResource("3_ykexx")]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_sxxyk")
+
+[node name="DestroyComponent" parent="." node_paths=PackedStringArray("node", "spawner_component") instance=ExtResource("5_1rmtu")]
+node = NodePath("..")
+spawner_component = NodePath("../SpawnerComponent")
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("6_uufri")
+scene = ExtResource("7_a8hb8")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

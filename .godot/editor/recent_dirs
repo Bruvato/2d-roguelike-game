@@ -1,9 +1,14 @@
+res://scenes/components/knockback
+res://scenes
+res://scenes/components/destroy
+res://scenes/components/shake
+res://scenes/components/hurt
+res://scenes/components/hurtbox
 res://shaders
 res://scenes/components/flash
 res://scenes/components/scale
 res://scenes/components/move
 res://scenes/components/spawner
-res://scenes
 res://scenes/player
 res://scripts
 res://

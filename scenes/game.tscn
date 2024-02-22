@@ -94,9 +94,9 @@ shape = SubResource("WorldBoundaryShape2D_wyax6")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundaries"]
 shape = SubResource("WorldBoundaryShape2D_oldoo")
 
-[node name="Projectiles" type="Node2D" parent="."]
+[node name="Projectiles" type="Node" parent="."]
 
-[node name="Particles" type="Node2D" parent="."]
+[node name="Particles" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1

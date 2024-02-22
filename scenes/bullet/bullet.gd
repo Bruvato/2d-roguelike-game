@@ -5,36 +5,22 @@ extends Area2D
 @export var life_time: float
 @onready var move_component: MoveComponent = $MoveComponent
 
-@onready var flash_component: FlashComponent = $FlashComponent
+@onready var hitbox_component: HitboxComponent = $HitboxComponent
 
-var normal: Vector2
+@onready var destroy_component: DestroyComponent = $DestroyComponent
 
 
 func _ready():
-	flash_component.flash()
-	
+	hitbox_component.hit_hurtbox.connect(destroy_component.destroy.unbind(1))
 	$Timer.start(life_time)
-
-func _physics_process(delta):
-	if $RayCast2D.is_colliding():
-		normal = $RayCast2D.get_collision_normal().normalized()
-
 
 
 func _on_timer_timeout():
-	die()
+	destroy_component.destroy()
 
 func _on_body_entered(body: Node2D):
 	if body is Enemy:
 		return
-	if $RayCast2D.is_colliding():
-		if normal.length() == 0:
-			normal = $RayCast2D.get_collision_normal().normalized()
-		#direction = direction.bounce(normal)
-		#rotation = direction.angle()
 
-	die()
+	destroy_component.destroy()
 
-func die(body: Node2D = null):
-	queue_free()
-	Signals.emit_signal("bullet_collided", global_position, normal)

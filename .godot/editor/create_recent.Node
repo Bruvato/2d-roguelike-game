@@ -1,6 +1,7 @@
-Timer
 Node
+SpawnerComponent
 Node2D
+Timer
 LightOccluder2D
 CollisionShape2D
 RayCast2D
@@ -11,4 +12,3 @@ RemoteTransform2D
 ProgressBar
 CollisionPolygon2D
 Attack
-Sprite2D

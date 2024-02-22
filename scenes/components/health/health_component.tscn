@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/components/health/health_component.gd" id="1_2df4d"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_8bpj0"]
 
-[node name="Health Component" type="Node2D"]
+[node name="Health Component" type="Node"]
 script = ExtResource("1_2df4d")
 
 [node name="Health Bar Component" type="Node2D" parent="."]
