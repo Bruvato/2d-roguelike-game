@@ -24,9 +24,7 @@ func _ready():
 		spawn_particle(ENEMY_DEATH_PARTICLE, spawn_position, direction))
 
 func _process(delta):
-	if Input.is_action_just_pressed("down"):
-		var new_enemy = ENEMY.instantiate()
-		#$Enemies.add_child(new_enemy)
+	pass
 
 func spawn(r: Resource, spawn_position: Vector2):
 	var o = r.instantiate()

@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://bs4kptj6601u2"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_y3kej"]
+[ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_8wosq"]
+[ext_resource type="PackedScene" uid="uid://c68k4p27ox5u2" path="res://scenes/gun/gun.tscn" id="3_n7ewh"]
+[ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/components/health/health_component.tscn" id="4_bt305"]
+[ext_resource type="PackedScene" uid="uid://cqsi3oe76v65" path="res://scenes/components/move/character_move_component.tscn" id="4_oo521"]
+[ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/components/hurtbox/hurtbox_component.tscn" id="5_8gik0"]
+[ext_resource type="PackedScene" uid="uid://bfjvyhdyi4shf" path="res://scenes/components/move/move_input_component.tscn" id="5_lpthe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3n5vj"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcfmg"]
+size = Vector2(8, 8)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+platform_floor_layers = 0
+script = ExtResource("1_y3kej")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3n5vj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.301961, 0.65098, 1, 1)
+texture = ExtResource("2_8wosq")
+
+[node name="Gun" parent="." instance=ExtResource("3_n7ewh")]
+position = Vector2(6, 0)
+is_player = true
+fire_rate = 10.0
+mag_size = 20
+reload_time = 1.0
+
+[node name="CharacterMoveComponent" parent="." node_paths=PackedStringArray("character") instance=ExtResource("4_oo521")]
+character = NodePath("..")
+speed = 50.0
+acceleration = 25.0
+
+[node name="MoveInputComponent" parent="." node_paths=PackedStringArray("character_move_component") instance=ExtResource("5_lpthe")]
+character_move_component = NodePath("../CharacterMoveComponent")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("4_bt305")]
+MAX_HEALTH = 10.0
+sprite = NodePath("../Sprite2D")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_8gik0")]
+collision_layer = 2
+collision_mask = 0
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_kcfmg")

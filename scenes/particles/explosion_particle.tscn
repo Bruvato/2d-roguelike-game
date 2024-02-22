@@ -28,6 +28,7 @@ curve = SubResource("Curve_ldrx4")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s3hcx"]
 particle_flag_disable_z = true
+angle_max = 360.0
 spread = 180.0
 initial_velocity_min = 500.0
 initial_velocity_max = 500.0

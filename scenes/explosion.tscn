@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d11sccrogxpyx"]
 
-[ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/attack/attack_component.tscn" id="1_7yaoi"]
+[ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/hitbox/hitbox_component.tscn" id="1_8mrxm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1exc4"]
 
@@ -14,12 +14,13 @@ collision_mask = 0
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_1exc4")
 
-[node name="Attack Component" parent="." instance=ExtResource("1_7yaoi")]
+[node name="Hitbox Component" parent="." instance=ExtResource("1_8mrxm")]
 collision_layer = 0
 collision_mask = 6
-knockback_force = 500.0
-attack_rate = 0.0
+knockback_force = 300.0
+area_attack = true
+attack_rate = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Component"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox Component"]
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_igh7h")

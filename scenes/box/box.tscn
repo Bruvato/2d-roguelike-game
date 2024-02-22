@@ -1,19 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://bg7t7jk8503bs"]
+[gd_scene load_steps=7 format=3 uid="uid://bg7t7jk8503bs"]
 
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="1_nqlia"]
 [ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/components/health/health_component.tscn" id="2_1mxg3"]
 [ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/components/hurtbox/hurtbox_component.tscn" id="3_ngnhd"]
 
+[sub_resource type="GDScript" id="GDScript_sbsq5"]
+script/source = "extends StaticBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3myx"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_luhk4"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
 
 [node name="Box" type="StaticBody2D"]
+script = SubResource("GDScript_sbsq5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 0.921569, 1)
+modulate = Color(0.729412, 0.380392, 0.337255, 1)
 texture = ExtResource("1_nqlia")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -24,10 +39,10 @@ MAX_HEALTH = 1.0
 sprite = NodePath("../Sprite2D")
 died_signal = "box_died"
 
-[node name="HurtBox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_ngnhd")]
+[node name="Hurtbox Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_ngnhd")]
 collision_layer = 4
 collision_mask = 0
 health_component = NodePath("../Health Component")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox Component"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Component"]
 shape = SubResource("RectangleShape2D_luhk4")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ci0f4ridrqfsx"]
+[gd_scene load_steps=19 format=3 uid="uid://ci0f4ridrqfsx"]
 
 [ext_resource type="PackedScene" uid="uid://bs4kptj6601u2" path="res://scenes/player/player.tscn" id="1_5mk2y"]
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_q8vc1"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bg7t7jk8503bs" path="res://scenes/box/box.tscn" id="3_xcke3"]
 [ext_resource type="Shader" path="res://shaders/drop_shadow.gdshader" id="4_vsqqg"]
 [ext_resource type="PackedScene" uid="uid://7hivgxnkmgup" path="res://scenes/camera/camera.tscn" id="6_2s27p"]
+[ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="8_rsrss"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5akkw"]
 normal = Vector2(1, 2.08165e-12)
@@ -23,6 +24,30 @@ distance = -180.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oldoo"]
 distance = -180.0
 
+[sub_resource type="TileMapPattern" id="TileMapPattern_1yjxh"]
+tile_data = PackedInt32Array(0, 3, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pigjy"]
+resource_name = "Wall"
+texture = ExtResource("8_rsrss")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:0/0/modulate = Color(0.341176, 0.160784, 0.294118, 1)
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_ahv0a"]
+scenes/1/scene = ExtResource("3_xcke3")
+
+[sub_resource type="TileSet" id="TileSet_u2a7l"]
+tile_size = Vector2i(8, 8)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+sources/3 = SubResource("TileSetAtlasSource_pigjy")
+sources/4 = SubResource("TileSetScenesCollectionSource_ahv0a")
+pattern_0 = SubResource("TileMapPattern_1yjxh")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cb1nf"]
 shader = ExtResource("4_vsqqg")
 shader_parameter/background_color = Color(0.196078, 0.160784, 0.278431, 1)
@@ -35,15 +60,19 @@ background_mode = 3
 [node name="Game" type="Node2D"]
 script = ExtResource("1_q8vc1")
 
-[node name="Mouse" parent="." instance=ExtResource("2_s2g7p")]
-
 [node name="Player" parent="." instance=ExtResource("1_5mk2y")]
 position = Vector2(218, 146)
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("2_vdlbc")]
-position = Vector2(75, 187)
+position = Vector2(112, 168)
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("2_vdlbc")]
+position = Vector2(176, 232)
+
+[node name="Enemy3" parent="Enemies" instance=ExtResource("2_vdlbc")]
+position = Vector2(224, 256)
 
 [node name="Box" parent="." instance=ExtResource("3_xcke3")]
 position = Vector2(129, 90)
@@ -79,6 +108,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.196078, 0.160784, 0.278431, 1)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_u2a7l")
+format = 2
+layer_0/tile_data = PackedInt32Array(1310766, 3, 0, 1376302, 3, 0, 1441838, 3, 0, 1507374, 3, 0, 1572910, 3, 0, 1638446, 3, 0, 1703982, 3, 0, 1769518, 3, 0, 1310767, 3, 0, 1376303, 3, 0, 1441839, 3, 0, 1507375, 3, 0, 1572911, 3, 0, 1638447, 3, 0, 1703983, 3, 0, 1769519, 3, 0, 1310768, 3, 0, 1376304, 3, 0, 1441840, 3, 0, 1507376, 3, 0, 1572912, 3, 0, 1638448, 3, 0, 1703984, 3, 0, 1769520, 3, 0, 1310769, 3, 0, 1376305, 3, 0, 1441841, 3, 0, 1507377, 3, 0, 1572913, 3, 0, 1638449, 3, 0, 1703985, 3, 0, 1769521, 3, 0, 1310770, 3, 0, 1376306, 3, 0, 1441842, 3, 0, 1507378, 3, 0, 1572914, 3, 0, 1638450, 3, 0, 1703986, 3, 0, 1769522, 3, 0, 1310771, 3, 0, 1376307, 3, 0, 1441843, 3, 0, 1507379, 3, 0, 1572915, 3, 0, 1638451, 3, 0, 1703987, 3, 0, 1769523, 3, 0, 1310772, 3, 0, 1376308, 3, 0, 1441844, 3, 0, 1507380, 3, 0, 1572916, 3, 0, 1638452, 3, 0, 1703988, 3, 0, 1769524, 3, 0, 393245, 3, 0, 458781, 3, 0, 524317, 3, 0, 589853, 3, 0, 655389, 3, 0, 720925, 3, 0, 786461, 3, 0, 851997, 3, 0, 917533, 3, 0, 983069, 3, 0, 393246, 3, 0, 393247, 3, 0, 393248, 3, 0, 393249, 3, 0, 393250, 3, 0, 393251, 3, 0, 393252, 3, 0, 393253, 3, 0, 393254, 3, 0, 393255, 3, 0, 393256, 3, 0, 393257, 3, 0, 393258, 3, 0, 393259, 3, 0, 393260, 3, 0, 393261, 3, 0, 393262, 3, 0, 393263, 3, 0, 393264, 3, 0, 393265, 3, 0, 917553, 3, 0, 917552, 3, 0, 917551, 3, 0, 917550, 3, 0, 917549, 3, 0, 917548, 3, 0, 917547, 3, 0, 917546, 3, 0, 917545, 3, 0, 917544, 3, 0, 917543, 3, 0, 917542, 3, 0, 917541, 3, 0, 917540, 3, 0, 917539, 3, 0, 917538, 3, 0, 917537, 3, 0, 458801, 3, 0, 524337, 3, 0, 589873, 3, 0, 655409, 3, 0, 720945, 3, 0, 786481, 3, 0, 852017, 3, 0, 852007, 3, 0, 786471, 3, 0, 720935, 3, 0, 655399, 3, 0, 589863, 3, 0)
+
+[node name="Mouse" parent="." instance=ExtResource("2_s2g7p")]
 
 [node name="Drop Shadow" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_cb1nf")

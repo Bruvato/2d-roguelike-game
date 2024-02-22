@@ -11,7 +11,10 @@ var color: Color
 @export var damaged_signal: String
 @export var died_signal: String
 
-@onready var health_bar: TextureProgressBar = $"Health Bar/Progress Bar"
+@onready var health_bar: TextureProgressBar = $"Health Bar Component/Progress Bar"
+
+@onready var flash_component: FlashComponent = $"../FlashComponent"
+
 
 func _ready():
 	current_health = MAX_HEALTH
@@ -20,7 +23,7 @@ func _ready():
 	health_bar.max_value = MAX_HEALTH
 
 func _process(delta):
-	$"Health Bar".set_rotation(-global_rotation)
+	$"Health Bar Component".set_rotation(-global_rotation)
 
 func take_damage(attack: Attack):
 	current_health -= attack.attack_damage
@@ -31,21 +34,17 @@ func take_damage(attack: Attack):
 		get_parent().velocity = attack.attack_position.direction_to(global_position) * attack.knockback_force
 	
 	#add I FRAMES
-	color = sprite.modulate
-	sprite.modulate = Color.WHITE
-	%Timer.start()
+	flash_component.flash()
+
 	
 	if current_health <= 0:
 		get_parent().queue_free()
 		if died_signal:
 			Signals.emit_signal(died_signal, global_position, attack.attack_position.direction_to(global_position))
 	
-	if damaged_signal:
+	elif damaged_signal:
 		Signals.emit_signal(damaged_signal, global_position, attack.attack_position.direction_to(global_position))
 
 func update_health_bar():
 	health_bar.visible = true
 	health_bar.value = current_health
-
-func _on_timeout():
-	sprite.modulate = color

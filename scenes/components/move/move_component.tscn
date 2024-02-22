@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dy6i0al7h0g7r"]
+
+[ext_resource type="Script" path="res://scenes/components/move/move_component.gd" id="1_iibd7"]
+
+[node name="MoveComponent" type="Node" node_paths=PackedStringArray("actor")]
+script = ExtResource("1_iibd7")
+actor = NodePath("")
+speed = 500.0

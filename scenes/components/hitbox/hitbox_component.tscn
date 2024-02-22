@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://05m5p8c02o1n"]
 
-[ext_resource type="Script" path="res://scenes/components/attack/attack_component.gd" id="1_ejvqo"]
+[ext_resource type="Script" path="res://scenes/components/hitbox/hitbox_component.gd" id="1_1xtep"]
 
-[node name="Attack Component" type="Area2D"]
-script = ExtResource("1_ejvqo")
-attack_rate = 1.0
+[node name="Hitbox Component" type="Area2D"]
+script = ExtResource("1_1xtep")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

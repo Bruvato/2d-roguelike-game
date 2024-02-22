@@ -1,20 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://be1g0vap5etwr"]
+[gd_scene load_steps=9 format=3 uid="uid://be1g0vap5etwr"]
 
 [ext_resource type="Script" path="res://scenes/bullet/bullet.gd" id="1_6vknx"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_toj7o"]
-[ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/attack/attack_component.tscn" id="3_1qpso"]
+[ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/hitbox/hitbox_component.tscn" id="3_ykexx"]
+[ext_resource type="PackedScene" uid="uid://dy6i0al7h0g7r" path="res://scenes/components/move/move_component.tscn" id="4_k0j1l"]
+[ext_resource type="PackedScene" uid="uid://xth7gvg83fec" path="res://scenes/components/flash/flash_component.tscn" id="5_yhpl6"]
+[ext_resource type="Material" uid="uid://bjm4gtsd5hqu1" path="res://shaders/white_flash_material.tres" id="6_qccw4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xm5uy"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxxyk"]
-size = Vector2(16, 8)
+size = Vector2(8, 4)
 
 [node name="Bullet" type="Area2D"]
+z_index = -1
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_6vknx")
-life_time = 3.0
+life_time = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.894118, 0.470588, 1)
@@ -25,17 +29,29 @@ texture = ExtResource("2_toj7o")
 scale = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_xm5uy")
 
-[node name="Attack Component" parent="." instance=ExtResource("3_1qpso")]
+[node name="Hitbox Component" parent="." instance=ExtResource("3_ykexx")]
 collision_layer = 0
 collision_mask = 4
 knockback_force = 100.0
-piercing = true
-attack_rate = 2.08165e-12
 died_signal = "bullet_collided"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attack Component"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox Component"]
 shape = SubResource("RectangleShape2D_sxxyk")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-4, 0)
+exclude_parent = false
+target_position = Vector2(50, 0)
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="MoveComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("4_k0j1l")]
+actor = NodePath("..")
+speed = 300.0
+
+[node name="FlashComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_yhpl6")]
+flash_material = ExtResource("6_qccw4")
+sprite = NodePath("../Sprite2D")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

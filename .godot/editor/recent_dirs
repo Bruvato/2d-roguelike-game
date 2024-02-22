@@ -1,4 +1,10 @@
+res://shaders
+res://scenes/components/flash
+res://scenes/components/scale
+res://scenes/components/move
+res://scenes/components/spawner
 res://scenes
+res://scenes/player
 res://scripts
 res://
 res://assets
