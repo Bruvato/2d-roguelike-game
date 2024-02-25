@@ -19,7 +19,7 @@ func _on_timer_timeout():
 	destroy_component.destroy()
 
 func _on_body_entered(body: Node2D):
-	if body is Enemy:
+	if body is CharacterBody2D:
 		return
 
 	destroy_component.destroy()

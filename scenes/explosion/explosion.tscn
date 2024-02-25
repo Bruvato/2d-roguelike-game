@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://i0vo6wcln2ft"]
+
+[ext_resource type="Script" path="res://scenes/explosion/explosion.gd" id="1_0b01c"]
+[ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/hitbox/hitbox_component.tscn" id="2_bthne"]
+[ext_resource type="PackedScene" uid="uid://ofe6rg7fkmox" path="res://scenes/components/scale/scale_component.tscn" id="3_l644g"]
+[ext_resource type="PackedScene" uid="uid://f1syx7rvfguu" path="res://scenes/components/destroy/destroy_component.tscn" id="4_tw673"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3dpoh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qpy4l"]
+radius = 358.16
+
+[node name="Explosion" type="Area2D"]
+script = ExtResource("1_0b01c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3dpoh")
+
+[node name="Hitbox Component" parent="." instance=ExtResource("2_bthne")]
+collision_layer = 0
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox Component"]
+shape = SubResource("CircleShape2D_qpy4l")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="ScaleComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_l644g")]
+sprite = NodePath("../Hitbox Component")
+scale_amount = Vector2(5, 5)
+scale_duration_in = 3.0
+
+[node name="DestroyComponent" parent="." node_paths=PackedStringArray("node") instance=ExtResource("4_tw673")]
+node = NodePath("..")

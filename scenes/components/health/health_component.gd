@@ -5,16 +5,15 @@ extends Node
 	set(value):
 		health = value
 		
-		healthed_changed.emit()
+		healthed_changed.emit(health)
 		
 		if health <= 0:
 			no_health.emit()
 
-signal healthed_changed()
+signal healthed_changed(health: int)
 signal no_health()
 
-	#if (get_parent() is CharacterBody2D):
-		#get_parent().velocity = attack.attack_position.direction_to(global_position) * attack.knockback_force
+
 
 	#add I FRAMES
 	#flash_component.flash()

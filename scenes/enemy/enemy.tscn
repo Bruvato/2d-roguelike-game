@@ -1,12 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://b7j0bsuybyyil"]
+[gd_scene load_steps=22 format=3 uid="uid://b7j0bsuybyyil"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_vwiim"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_ld3k2"]
 [ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/components/health/health_component.tscn" id="3_7ql3b"]
+[ext_resource type="PackedScene" uid="uid://c68k4p27ox5u2" path="res://scenes/gun/gun.tscn" id="3_wibbt"]
+[ext_resource type="PackedScene" uid="uid://bxskybm5wheuu" path="res://scenes/components/health_bar/health_bar_component.tscn" id="4_fpbx5"]
 [ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/components/hurtbox/hurtbox_component.tscn" id="4_kvf4h"]
 [ext_resource type="PackedScene" uid="uid://05m5p8c02o1n" path="res://scenes/components/hitbox/hitbox_component.tscn" id="5_2dgei"]
+[ext_resource type="PackedScene" uid="uid://crqom56lj1yuq" path="res://scenes/bullet/enemy_bullet.tscn" id="5_jei7l"]
 [ext_resource type="PackedScene" uid="uid://xth7gvg83fec" path="res://scenes/components/flash/flash_component.tscn" id="6_3rcrc"]
 [ext_resource type="Material" uid="uid://bjm4gtsd5hqu1" path="res://shaders/white_flash_material.tres" id="7_y54a2"]
+[ext_resource type="PackedScene" uid="uid://caopvb3g0tl6m" path="res://scenes/components/health_bar/health_bar.tscn" id="8_iayi7"]
 [ext_resource type="PackedScene" uid="uid://ofe6rg7fkmox" path="res://scenes/components/scale/scale_component.tscn" id="10_jnu66"]
 [ext_resource type="PackedScene" uid="uid://br8j4rvxh0yg7" path="res://scenes/components/hurt/hurt_component.tscn" id="10_xr3rm"]
 [ext_resource type="PackedScene" uid="uid://bi4oubf0hh0fp" path="res://scenes/components/shake/shake_component.tscn" id="11_jwyh8"]
@@ -39,8 +43,27 @@ texture = ExtResource("2_ld3k2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0r36j")
 
+[node name="Gun" parent="." node_paths=PackedStringArray("body", "spawner_component") instance=ExtResource("3_wibbt")]
+position = Vector2(6, 0)
+body = NodePath("..")
+spawner_component = NodePath("GunSpawnerComponent")
+fire_rate = 1.0
+reload_time = 0.0
+
+[node name="GunSpawnerComponent" parent="Gun" instance=ExtResource("12_hcrrb")]
+position = Vector2(-6, 0)
+scene = ExtResource("5_jei7l")
+
 [node name="Health Component" parent="." instance=ExtResource("3_7ql3b")]
 health = 3
+
+[node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component", "health_bar") instance=ExtResource("4_fpbx5")]
+health_component = NodePath("../Health Component")
+health_bar = NodePath("HealthBar")
+
+[node name="HealthBar" parent="HealthBarComponent" instance=ExtResource("8_iayi7")]
+offset_top = 8.0
+offset_bottom = 10.0
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("4_kvf4h")]
 collision_layer = 4
@@ -72,15 +95,14 @@ sprite = NodePath("../Sprite2D")
 node = NodePath("../Sprite2D")
 shake_duration = 0.5
 
-[node name="SpawnerComponent" parent="." instance=ExtResource("12_hcrrb")]
-scene = ExtResource("13_7jsot")
+[node name="KnockbackComponent" parent="." node_paths=PackedStringArray("body", "hurtbox_component") instance=ExtResource("15_kr5es")]
+body = NodePath("..")
+hurtbox_component = NodePath("../HurtboxComponent")
 
 [node name="DestroyComponent" parent="." node_paths=PackedStringArray("node", "health_component", "spawner_component") instance=ExtResource("14_gmhia")]
 node = NodePath("..")
 health_component = NodePath("../Health Component")
-spawner_component = NodePath("../SpawnerComponent")
+spawner_component = NodePath("SpawnerComponent")
 
-[node name="KnockbackComponent" parent="." node_paths=PackedStringArray("enemy", "hurtbox_component") instance=ExtResource("15_kr5es")]
-knockback_force = 200.0
-enemy = NodePath("..")
-hurtbox_component = NodePath("../HurtboxComponent")
+[node name="SpawnerComponent" parent="DestroyComponent" instance=ExtResource("12_hcrrb")]
+scene = ExtResource("13_7jsot")

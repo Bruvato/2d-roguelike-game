@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://crqom56lj1yuq"]
+
+[ext_resource type="PackedScene" uid="uid://be1g0vap5etwr" path="res://scenes/bullet/bullet.tscn" id="1_ulkv2"]
+
+[node name="EnemyBullet" instance=ExtResource("1_ulkv2")]
+collision_mask = 3
+
+[node name="Sprite2D" parent="." index="0"]
+modulate = Color(0.921569, 0.337255, 0.294118, 1)
+
+[node name="MoveComponent" parent="." index="3"]
+speed = 100.0
+
+[node name="HitboxComponent" parent="." index="4"]
+collision_mask = 2

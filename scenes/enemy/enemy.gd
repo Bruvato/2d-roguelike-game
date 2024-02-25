@@ -17,6 +17,7 @@ extends CharacterBody2D
 
 @onready var destroy_component: DestroyComponent = $DestroyComponent
 
+@onready var gun: Gun = $Gun
 
 func _ready() -> void:
 	hurtbox_component.hurt.connect(func(hitbox_component: HitboxComponent):
@@ -26,8 +27,18 @@ func _ready() -> void:
 		)
 	
 	hitbox_component.hit_hurtbox.connect(destroy_component.destroy.unbind(1))
+	
+	health_component.no_health.connect(func(): 
+		# if enemy is last enemy in wave:
+		#Signals.change_time_scale.emit(0.1, 0.5)
+		)
+
+func _process(delta: float) -> void:
+	gun.shoot()
 
 func _physics_process(delta: float) -> void:
+	if not player: return
+	
 	var direction: Vector2 = position.direction_to(player.global_position)
 
 	velocity.x = move_toward(velocity.x, direction.x * speed, accel)

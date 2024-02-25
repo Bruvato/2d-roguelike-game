@@ -1,22 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://bg7t7jk8503bs"]
+[gd_scene load_steps=17 format=3 uid="uid://bg7t7jk8503bs"]
 
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="1_nqlia"]
+[ext_resource type="Script" path="res://scenes/box/box.gd" id="1_ygmlm"]
 [ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/components/health/health_component.tscn" id="2_1mxg3"]
+[ext_resource type="PackedScene" uid="uid://br8j4rvxh0yg7" path="res://scenes/components/hurt/hurt_component.tscn" id="3_hov17"]
 [ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/components/hurtbox/hurtbox_component.tscn" id="3_ngnhd"]
-
-[sub_resource type="GDScript" id="GDScript_sbsq5"]
-script/source = "extends StaticBody2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
+[ext_resource type="PackedScene" uid="uid://bxskybm5wheuu" path="res://scenes/components/health_bar/health_bar_component.tscn" id="4_5jvqd"]
+[ext_resource type="PackedScene" uid="uid://caopvb3g0tl6m" path="res://scenes/components/health_bar/health_bar.tscn" id="5_5iu26"]
+[ext_resource type="PackedScene" uid="uid://ofe6rg7fkmox" path="res://scenes/components/scale/scale_component.tscn" id="5_517uj"]
+[ext_resource type="PackedScene" uid="uid://xth7gvg83fec" path="res://scenes/components/flash/flash_component.tscn" id="6_3aeg1"]
+[ext_resource type="Material" uid="uid://bjm4gtsd5hqu1" path="res://shaders/white_flash_material.tres" id="7_eb6ak"]
+[ext_resource type="PackedScene" uid="uid://f1syx7rvfguu" path="res://scenes/components/destroy/destroy_component.tscn" id="8_fk1sc"]
+[ext_resource type="PackedScene" uid="uid://d2csw2s18rwv3" path="res://scenes/components/spawner/spawner_component.tscn" id="9_3pj54"]
+[ext_resource type="PackedScene" uid="uid://b6uuen4iewga5" path="res://scenes/particles/explosion_particle.tscn" id="10_herxg"]
+[ext_resource type="PackedScene" uid="uid://i0vo6wcln2ft" path="res://scenes/explosion/explosion.tscn" id="14_5s3y7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j3myx"]
 size = Vector2(8, 8)
@@ -25,7 +22,7 @@ size = Vector2(8, 8)
 size = Vector2(8, 8)
 
 [node name="Box" type="StaticBody2D"]
-script = SubResource("GDScript_sbsq5")
+script = ExtResource("1_ygmlm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.729412, 0.380392, 0.337255, 1)
@@ -35,6 +32,19 @@ texture = ExtResource("1_nqlia")
 shape = SubResource("RectangleShape2D_j3myx")
 
 [node name="Health Component" parent="." instance=ExtResource("2_1mxg3")]
+health = 3
+
+[node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component", "health_bar") instance=ExtResource("4_5jvqd")]
+health_component = NodePath("../Health Component")
+health_bar = NodePath("HealthBar")
+
+[node name="HealthBar" parent="HealthBarComponent" instance=ExtResource("5_5iu26")]
+offset_top = 8.0
+offset_bottom = 10.0
+
+[node name="HurtComponent" parent="." node_paths=PackedStringArray("health_component", "hurtbox_component") instance=ExtResource("3_hov17")]
+health_component = NodePath("../Health Component")
+hurtbox_component = NodePath("../Hurtbox Component")
 
 [node name="Hurtbox Component" parent="." instance=ExtResource("3_ngnhd")]
 collision_layer = 4
@@ -42,3 +52,21 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Component"]
 shape = SubResource("RectangleShape2D_luhk4")
+
+[node name="ScaleComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("5_517uj")]
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("6_3aeg1")]
+flash_material = ExtResource("7_eb6ak")
+sprite = NodePath("../Sprite2D")
+
+[node name="DestroyComponent" parent="." node_paths=PackedStringArray("node", "health_component", "spawner_component") instance=ExtResource("8_fk1sc")]
+node = NodePath("..")
+health_component = NodePath("../Health Component")
+spawner_component = NodePath("SpawnerComponent")
+
+[node name="SpawnerComponent" parent="DestroyComponent" instance=ExtResource("9_3pj54")]
+scene = ExtResource("10_herxg")
+
+[node name="SpawnerComponent" parent="." instance=ExtResource("9_3pj54")]
+scene = ExtResource("14_5s3y7")

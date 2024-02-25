@@ -1,3 +1,6 @@
+res://scenes/explosion
+res://scenes/components/health_bar
+res://scenes/bullet
 res://scenes/components/knockback
 res://scenes
 res://scenes/components/destroy

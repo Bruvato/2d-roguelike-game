@@ -7,16 +7,18 @@ extends Node
 
 @export var spawner_component: SpawnerComponent
 
-@onready var particles: Node = get_node("/root/Game/Particles") 
+@onready var particles: Node = $"/root/Game/Particles"
 
 
 func _ready() -> void:
-	if !health_component: return
+	if not health_component: return
 	
 	health_component.no_health.connect(func(): 
 		destroy()
 		)
 
 func destroy():
-	spawner_component.spawn(node.global_position, node.global_rotation, particles)
+	if spawner_component: 
+		spawner_component.spawn(node.global_position, node.global_rotation, particles)
+	
 	node.queue_free()

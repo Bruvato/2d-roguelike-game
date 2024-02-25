@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://caopvb3g0tl6m"]
+
+[ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="1_b83p7"]
+
+[node name="HealthBar" type="TextureProgressBar"]
+offset_left = -4.0
+offset_top = -1.0
+offset_right = 4.0
+offset_bottom = 1.0
+pivot_offset = Vector2(4, 1)
+value = 75.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_b83p7")
+texture_progress = ExtResource("1_b83p7")
+tint_under = Color(0.243137, 0.137255, 0.278431, 1)
+tint_progress = Color(0.690196, 0.188235, 0.360784, 1)
