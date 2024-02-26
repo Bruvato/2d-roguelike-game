@@ -5,11 +5,12 @@ extends Area2D
 @onready var destroy_component: DestroyComponent = $DestroyComponent
 
 func _ready() -> void:
-	#scale_component.scaled.connect(func():
+	scale_component.scaled.connect(func():
+		print_debug("delted")
 		#destroy_component.destroy()
-		#)
-		#
+		)
+		
 	#hitbox_component.scale = Vector2.ZERO
-	#scale_component.tween_scale()
+	scale_component.tween_scale()
 	pass
 	

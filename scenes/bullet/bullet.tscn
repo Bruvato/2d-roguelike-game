@@ -45,9 +45,9 @@ shape = SubResource("RectangleShape2D_sxxyk")
 
 [node name="DestroyComponent" parent="." node_paths=PackedStringArray("node", "spawner_component") instance=ExtResource("5_1rmtu")]
 node = NodePath("..")
-spawner_component = NodePath("../SpawnerComponent")
+spawner_component = NodePath("SpawnerComponent")
 
-[node name="SpawnerComponent" type="Node2D" parent="."]
+[node name="SpawnerComponent" type="Node2D" parent="DestroyComponent"]
 script = ExtResource("6_uufri")
 scene = ExtResource("7_a8hb8")
 

@@ -10,6 +10,8 @@ extends StaticBody2D
 
 @onready var spawner_component: SpawnerComponent = $SpawnerComponent
 
+@onready var effects: Node = $"/root/Game/Effects"
+
 func _ready() -> void:
 	hurtbox_component.hurt.connect(func(hitbox: HitboxComponent):
 		flash_component.flash()
@@ -17,5 +19,5 @@ func _ready() -> void:
 		)
 	health_component.no_health.connect(func(): 
 		Signals.change_time_scale.emit(0.1, 0.1)
-		spawner_component.spawn(global_position, global_rotation)
+		spawner_component.call_deferred("spawn", global_position, global_rotation, effects)
 		)

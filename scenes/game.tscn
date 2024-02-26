@@ -93,6 +93,8 @@ shape = SubResource("WorldBoundaryShape2D_oldoo")
 
 [node name="Projectiles" type="Node" parent="."]
 
+[node name="Effects" type="Node" parent="."]
+
 [node name="Particles" type="Node" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

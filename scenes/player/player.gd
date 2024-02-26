@@ -21,6 +21,7 @@ func _ready() -> void:
 		shake_component.tween_shake()
 		)
 	gun.fired.connect(func():
+		scale_component.tween_scale()
 		Signals.emit_signal("shake", 0.5)
 		)
 		

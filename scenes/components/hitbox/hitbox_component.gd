@@ -7,7 +7,7 @@ signal hit_hurtbox(hurtbox: HurtBoxComponent)
 
 func _on_area_entered(area: Area2D) -> void:
 	if not area is HurtBoxComponent: return
-	if area.get_parent() is Box: print_debug("ooo")
+
 	hit_hurtbox.emit(area)
 
 	area.hurt.emit(self)

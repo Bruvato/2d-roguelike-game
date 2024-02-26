@@ -6,7 +6,6 @@ extends Area2D
 
 @onready var shooting_point: Marker2D = %"ShootingPoint"
 
-@onready var player_scale_component: ScaleComponent = $"../ScaleComponent"
 @onready var scale_component: ScaleComponent = $ScaleComponent
 
 @export var fire_rate: float = 5
@@ -33,8 +32,8 @@ func _ready() -> void:
 func shoot():
 	if (!_fired and !_reloading):
 	
-		player_scale_component.tween_scale()
 		scale_component.tween_scale()
+		
 		var new_bullet: Bullet = spawner_component.spawn(shooting_point.global_position, shooting_point.global_rotation, projectiles)
 		new_bullet.move_component.velocity = Vector2.RIGHT.rotated(global_rotation)
 		
