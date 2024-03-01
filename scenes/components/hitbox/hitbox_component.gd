@@ -3,11 +3,15 @@ extends Area2D
 
 @export var damage: int = 1
 
+@export var knockback_force: float = 100
+
 signal hit_hurtbox(hurtbox: HurtBoxComponent)
 
 func _on_area_entered(area: Area2D) -> void:
 	if not area is HurtBoxComponent: return
 
+	if area.is_invincible: return
+	
 	hit_hurtbox.emit(area)
 
 	area.hurt.emit(self)

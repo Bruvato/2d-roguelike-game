@@ -6,11 +6,9 @@ extends Area2D
 
 func _ready() -> void:
 	scale_component.scaled.connect(func():
-		print_debug("delted")
-		#destroy_component.destroy()
+		destroy_component.destroy()
 		)
 		
-	#hitbox_component.scale = Vector2.ZERO
 	scale_component.tween_scale()
 	pass
 	

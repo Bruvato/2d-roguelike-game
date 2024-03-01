@@ -10,8 +10,6 @@ extends Node
 
 var original_sprite_material: Material
 
-@onready var timer: Timer = $Timer
-
 
 func _ready() -> void:
 	original_sprite_material = sprite.material
@@ -19,7 +17,7 @@ func _ready() -> void:
 func flash():
 	sprite.material = flash_material
 	
-	timer.start(flash_duration)
-
-func _on_timer_timeout() -> void:
+	await get_tree().create_timer(flash_duration).timeout
+	
 	sprite.material = original_sprite_material
+	

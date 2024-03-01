@@ -32,7 +32,6 @@ texture = ExtResource("1_nqlia")
 shape = SubResource("RectangleShape2D_j3myx")
 
 [node name="Health Component" parent="." instance=ExtResource("2_1mxg3")]
-health = 3
 
 [node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component", "health_bar") instance=ExtResource("4_5jvqd")]
 health_component = NodePath("../Health Component")

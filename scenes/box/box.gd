@@ -18,6 +18,6 @@ func _ready() -> void:
 		scale_component.tween_scale()
 		)
 	health_component.no_health.connect(func(): 
-		Signals.change_time_scale.emit(0.1, 0.1)
+		Signals.change_time_scale.emit(0.1, 0.5)
 		spawner_component.call_deferred("spawn", global_position, global_rotation, effects)
 		)

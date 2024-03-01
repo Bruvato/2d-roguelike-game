@@ -8,5 +8,6 @@ extends Node
 
 func _ready() -> void:
 	hurtbox_component.hurt.connect(func(hitbox: HitboxComponent):
-		body.velocity = hitbox.global_position.direction_to(hurtbox_component.global_position) * knockback_force
+
+		body.velocity = hitbox.global_position.direction_to(hurtbox_component.global_position) * hitbox.knockback_force
 		)

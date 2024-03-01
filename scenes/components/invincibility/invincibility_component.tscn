@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://pmms8go5qu62"]
+
+[ext_resource type="Script" path="res://scenes/components/invincibility/invincibility_component.gd" id="1_mqlyx"]
+
+[node name="InvincibilityComponent" type="Node" node_paths=PackedStringArray("hurtbox_component")]
+script = ExtResource("1_mqlyx")
+hurtbox_component = NodePath("")

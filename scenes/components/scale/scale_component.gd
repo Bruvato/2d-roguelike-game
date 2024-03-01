@@ -21,4 +21,5 @@ func tween_scale() -> void:
 	
 	tween.tween_property(sprite, "scale", initial_scale, scale_duration_out).from(scale_amount)
 	
+	await tween.finished
 	scaled.emit()

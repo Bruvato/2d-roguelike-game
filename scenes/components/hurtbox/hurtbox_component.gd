@@ -3,9 +3,11 @@ extends Area2D
 
 signal hurt(hitbox: HitboxComponent)
 
-	
-#@export var health_component: HealthComponent
-#
-#func take_damage(attack: Attack):
-	#if health_component:
-		#health_component.take_damage(attack)
+@export var is_invincible: bool = false:
+	set(value):
+		is_invincible = value
+		
+		for child in get_children():
+			if not child is CollisionShape2D and not child is CollisionPolygon2D: 
+				continue
+			child.set_deferred("disabled", value)

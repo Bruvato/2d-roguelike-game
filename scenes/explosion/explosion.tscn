@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://f1syx7rvfguu" path="res://scenes/components/destroy/destroy_component.tscn" id="4_tw673"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3dpoh"]
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qpy4l"]
+radius = 4.0
 
 [node name="Explosion" type="Area2D"]
 script = ExtResource("1_0b01c")
@@ -18,6 +20,7 @@ shape = SubResource("CircleShape2D_3dpoh")
 [node name="Hitbox Component" parent="." instance=ExtResource("2_bthne")]
 collision_layer = 0
 collision_mask = 6
+knockback_force = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox Component"]
 shape = SubResource("CircleShape2D_qpy4l")
@@ -25,8 +28,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="ScaleComponent" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("3_l644g")]
 sprite = NodePath("../Hitbox Component")
-scale_amount = Vector2(5, 5)
-scale_duration_in = 5.0
+scale_amount = Vector2(10, 10)
 scale_duration_out = 2.08165e-12
 
 [node name="DestroyComponent" parent="." node_paths=PackedStringArray("node") instance=ExtResource("4_tw673")]

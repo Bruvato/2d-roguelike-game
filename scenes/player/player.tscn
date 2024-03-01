@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bs4kptj6601u2"]
+[gd_scene load_steps=22 format=3 uid="uid://bs4kptj6601u2"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_y3kej"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_8wosq"]
 [ext_resource type="PackedScene" uid="uid://c68k4p27ox5u2" path="res://scenes/gun/gun.tscn" id="3_n7ewh"]
+[ext_resource type="Script" path="res://scenes/components/dash/dash_component.gd" id="3_uxcq1"]
 [ext_resource type="PackedScene" uid="uid://kf6ombqg0ga4" path="res://scenes/components/health/health_component.tscn" id="4_bt305"]
 [ext_resource type="PackedScene" uid="uid://cxcij6xta585l" path="res://scenes/components/hurtbox/hurtbox_component.tscn" id="5_8gik0"]
 [ext_resource type="PackedScene" uid="uid://be1g0vap5etwr" path="res://scenes/bullet/bullet.tscn" id="5_r2y80"]
@@ -10,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://br8j4rvxh0yg7" path="res://scenes/components/hurt/hurt_component.tscn" id="6_vlkwa"]
 [ext_resource type="PackedScene" uid="uid://caopvb3g0tl6m" path="res://scenes/components/health_bar/health_bar.tscn" id="7_uvll3"]
 [ext_resource type="PackedScene" uid="uid://ofe6rg7fkmox" path="res://scenes/components/scale/scale_component.tscn" id="8_5ge1y"]
+[ext_resource type="PackedScene" uid="uid://pmms8go5qu62" path="res://scenes/components/invincibility/invincibility_component.tscn" id="8_h8xk8"]
 [ext_resource type="PackedScene" uid="uid://xth7gvg83fec" path="res://scenes/components/flash/flash_component.tscn" id="9_0aydo"]
 [ext_resource type="PackedScene" uid="uid://f1syx7rvfguu" path="res://scenes/components/destroy/destroy_component.tscn" id="10_75qxf"]
 [ext_resource type="Material" uid="uid://bjm4gtsd5hqu1" path="res://shaders/white_flash_material.tres" id="10_lge48"]
@@ -38,6 +40,13 @@ texture = ExtResource("2_8wosq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3n5vj")
 
+[node name="DashComponent" type="Node" parent="." node_paths=PackedStringArray("character_body", "invincibility_component")]
+script = ExtResource("3_uxcq1")
+character_body = NodePath("..")
+dash_speed = 2000.0
+dash_time = 0.1
+invincibility_component = NodePath("../InvincibilityComponent")
+
 [node name="Gun" parent="." node_paths=PackedStringArray("body", "spawner_component") instance=ExtResource("3_n7ewh")]
 position = Vector2(6, 0)
 body = NodePath("..")
@@ -50,7 +59,11 @@ position = Vector2(-6, 0)
 scene = ExtResource("5_r2y80")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_bt305")]
-health = 3
+health = 5
+
+[node name="InvincibilityComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("8_h8xk8")]
+hurtbox_component = NodePath("../HurtboxComponent")
+sprite = NodePath("../Sprite2D")
 
 [node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component", "health_bar") instance=ExtResource("5_vuihd")]
 health_component = NodePath("../HealthComponent")
