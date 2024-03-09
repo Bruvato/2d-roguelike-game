@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bs4kptj6601u2"]
+[gd_scene load_steps=24 format=3 uid="uid://bs4kptj6601u2"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_y3kej"]
 [ext_resource type="Texture2D" uid="uid://1hjng75rmxpm" path="res://assets/square.png" id="2_8wosq"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://pmms8go5qu62" path="res://scenes/components/invincibility/invincibility_component.tscn" id="8_h8xk8"]
 [ext_resource type="PackedScene" uid="uid://xth7gvg83fec" path="res://scenes/components/flash/flash_component.tscn" id="9_0aydo"]
 [ext_resource type="PackedScene" uid="uid://f1syx7rvfguu" path="res://scenes/components/destroy/destroy_component.tscn" id="10_75qxf"]
+[ext_resource type="Shader" path="res://shaders/blink.gdshader" id="10_b5nfl"]
 [ext_resource type="Material" uid="uid://bjm4gtsd5hqu1" path="res://shaders/white_flash_material.tres" id="10_lge48"]
 [ext_resource type="PackedScene" uid="uid://bi4oubf0hh0fp" path="res://scenes/components/shake/shake_component.tscn" id="11_7r3gh"]
 [ext_resource type="PackedScene" uid="uid://d2csw2s18rwv3" path="res://scenes/components/spawner/spawner_component.tscn" id="11_vqokq"]
@@ -22,6 +23,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3n5vj"]
 size = Vector2(8, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ksxdw"]
+shader = ExtResource("10_b5nfl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcfmg"]
 size = Vector2(8, 8)
@@ -64,6 +68,10 @@ health = 5
 [node name="InvincibilityComponent" parent="." node_paths=PackedStringArray("hurtbox_component", "sprite") instance=ExtResource("8_h8xk8")]
 hurtbox_component = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" parent="InvincibilityComponent" node_paths=PackedStringArray("sprite") instance=ExtResource("9_0aydo")]
+flash_material = SubResource("ShaderMaterial_ksxdw")
+sprite = NodePath("../../Sprite2D")
 
 [node name="HealthBarComponent" parent="." node_paths=PackedStringArray("health_component", "health_bar") instance=ExtResource("5_vuihd")]
 health_component = NodePath("../HealthComponent")

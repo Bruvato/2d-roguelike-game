@@ -23,8 +23,8 @@ extends CharacterBody2D
 
 func _ready() -> void:
 	hurtbox_component.hurt.connect(func(hitbox_component: HitboxComponent):
-		Signals.change_time_scale.emit(0.1, 0.1)
 		flash_component.flash()
+		Signals.change_time_scale.emit(0.1, 0.1)
 		scale_component.tween_scale()
 		shake_component.tween_shake()
 		

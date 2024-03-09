@@ -17,7 +17,8 @@ func _ready() -> void:
 		flash_component.flash()
 		scale_component.tween_scale()
 		)
-	health_component.no_health.connect(func(): 
+	health_component.no_health.connect(func():
+		Signals.emit_signal("shake", 0.5)
 		Signals.change_time_scale.emit(0.1, 0.5)
 		spawner_component.call_deferred("spawn", global_position, global_rotation, effects)
 		)

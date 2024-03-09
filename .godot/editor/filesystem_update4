@@ -28,3 +28,5 @@ res://scenes/components/flash/flash_component.tscn
 res://scenes/components/flash/flash_component.gd
 res://scenes/components/invincibility/invincibility_component.gd
 res://scenes/player/player.gd
+res://scenes/box/box.gd
+res://shaders/blink.gdshader
