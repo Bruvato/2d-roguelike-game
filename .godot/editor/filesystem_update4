@@ -1,4 +1,5 @@
 res://scenes/game.tscn
+res://shaders/blink.gdshader
 res://shaders/white_flash.gdshader
 res://shaders/drop_shadow.gdshader
 res://scenes/camera/camera.tscn
@@ -25,8 +26,3 @@ res://scenes/bullet/enemy_bullet.tscn
 res://scenes/components/health_bar/health_bar_component.tscn
 res://scenes/components/health_bar/health_bar.tscn
 res://scenes/components/flash/flash_component.tscn
-res://scenes/components/flash/flash_component.gd
-res://scenes/components/invincibility/invincibility_component.gd
-res://scenes/player/player.gd
-res://scenes/box/box.gd
-res://shaders/blink.gdshader
